@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheer Up!</title>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #2340ff, #ff6b6b);
+      color: white;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    button {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #ff8c8c;
+    }
+
+    #balloonContainer {
+      position: relative;
+      height: 200px;
+    }
+
+    .balloon {
+      width: 50px;
+      height: 70px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      animation: floatUp 5s ease-in infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-500px);
+        opacity: 0;
+      }
+    }
+
+    #motivationImage {
+      max-width: 100%;
+      max-height: 300px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    /* Heart Animation */
+    .heart {
+      position: absolute;
+      top: 0;
+      right: -120px; /* Position to the right of the image */
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      transform: rotate(-45deg);
+      animation: pulse 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Believe in Yourself: The First Step Toward Unstoppable Courage! 🎉</h1>
+    <p>For You Yot!!</p>
+    <button id="generateQuote">Inspire Yot!!!</button>
+    <div style="position: relative;">
+      <img id="motivationImage" src="" alt="Motivational Image" style="display: none;">
+      <div class="heart" style="display: none;"></div>
+    </div>
+    <div id="balloonContainer"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const generateQuoteButton = document.getElementById('generateQuote');
+      const motivationImage = document.getElementById('motivationImage');
+      const heart = document.querySelector('.heart');
+      const balloonContainer = document.getElementById('balloonContainer');
+
+      generateQuoteButton.addEventListener('click', () => {
+        const randomImage = `motivate${Math.floor(Math.random() * 5) + 1}.jpg`;
+        motivationImage.src = randomImage;
+        motivationImage.style.display = 'block';
+        heart.style.display = 'block';
+        createBalloons();
+      });
+
+      function createBalloons() {
+        balloonContainer.innerHTML = '';
+        for (let i = 0; i < 10; i++) {
+          const balloon = document.createElement('div');
+          balloon.classList.add('balloon');
+          balloon.style.left = `${Math.random() * 100}%`;
+          balloon.style.backgroundColor = getRandomColor();
+          balloonContainer.appendChild(balloon);
+        }
+      }
+
+      function getRandomColor() {
+        const colors = ['#ff6b6b', '#ffcc5c', '#88d8b0', '#c23b22', '#6a4f4b'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+    });
+  </script>
+</body>
+</html>
